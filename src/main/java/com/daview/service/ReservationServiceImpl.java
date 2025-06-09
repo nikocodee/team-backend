@@ -45,4 +45,14 @@ public class ReservationServiceImpl implements ReservationService {
 			}
 		}
 	}
+	
+	@Override
+	public List<ReservationDTO> selectReservationsByPaymentId(String pymId){
+		return reservationMapper.selectReservationsByPaymentId(pymId);
+	}
+	
+	@Override
+	public int updateReservationStatus(String rsvId, int rsvType) {
+		return reservationMapper.updateReservationStatus(rsvId, rsvType);
+	}
 }

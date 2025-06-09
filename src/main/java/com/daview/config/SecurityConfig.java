@@ -24,7 +24,9 @@ public class SecurityConfig {
 		http.cors(cors -> {
 		}).csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/**", "/uploads/**")
+				.authorizeHttpRequests(
+//						auth -> auth.requestMatchers("/api/**", "/uploads/**")
+						auth -> auth.requestMatchers("/api/**")
 
 //										"/api/auth/**", 
 //										"/api/options/**", 

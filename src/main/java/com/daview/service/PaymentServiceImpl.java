@@ -1,5 +1,7 @@
 package com.daview.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.daview.dto.PaymentDTO;
@@ -18,6 +20,11 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentMapper.insertPayment(payment);
 	}
 
+	@Override
+	public List<PaymentDTO> selectPaymentByMemberId(String memberId) {
+		return paymentMapper.selectPaymentByMemberId(memberId);
+	}
+	
 	@Override
 	public PaymentDTO selectPaymentById(String pymId) {
 		return paymentMapper.selectPaymentById(pymId);

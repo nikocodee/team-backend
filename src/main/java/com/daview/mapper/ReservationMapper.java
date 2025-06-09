@@ -17,4 +17,8 @@ public interface ReservationMapper {
 	int deleteAllReservation();
 	
 	int updateReservationCount(String rsvId, int rsvCnt);
+	
+	List<ReservationDTO> selectReservationsByPaymentId(String pymId);
+	
+	int updateReservationStatus(String rsvId, int rsvType);
 }

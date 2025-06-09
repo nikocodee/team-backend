@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.daview.dto.ReservationDTO;
@@ -81,4 +82,29 @@ public class ReservationController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 수량 수정 중 오류가 발생했습니다.");
 		}
 	}
+	
+	// 해당 결제에 연결된 예약 목록 조회 (결제-예약 매핑 테이블 기반)
+	@GetMapping("/payment/{pymId}")
+	public ResponseEntity<?> getReservationsByPaymentId(@PathVariable String pymId) {
+	    List<ReservationDTO> reservations = reservationService.selectReservationsByPaymentId(pymId);
+
+	    if (reservations != null && !reservations.isEmpty()) {
+	        return ResponseEntity.ok(reservations);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 결제에 대한 예약이 없습니다.");
+	    }
+	}
+	
+	@PutMapping("/{rsvId}/status")
+	public ResponseEntity<String> updateReservationStatus(@PathVariable String rsvId){
+		int rsvType = 3;
+		
+		try {
+			reservationService.updateReservationStatus(rsvId, rsvType);
+			return ResponseEntity.ok("예약 상태가 결제 완료로 변경되었습니다.");
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예약 상태 변경에 실패했습니다.");
+		}
+	}
+
 }
