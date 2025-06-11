@@ -25,8 +25,8 @@ public class SecurityConfig {
 		}).csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
-//						auth -> auth.requestMatchers("/api/**", "/uploads/**")
-						auth -> auth.requestMatchers("/api/**")
+						auth -> auth.requestMatchers("/api/**", "/uploads/**")
+//						auth -> auth.requestMatchers("/api/**")
 
 //										"/api/auth/**", 
 //										"/api/options/**", 

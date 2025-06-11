@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.daview.dto.PaymentDTO;
 import com.daview.dto.PaymentReservationMapDTO;
+import com.daview.dto.PaymentWithReservationsDTO;
 import com.daview.service.PaymentReservationService;
 import com.daview.service.PaymentService;
 
@@ -47,15 +48,15 @@ public class PaymentController {
     }
 
 
-    @GetMapping("/member/{memberId}")
-    public ResponseEntity<List<PaymentDTO>> getPaymentsByMemberId(@PathVariable String memberId) {
-    	List<PaymentDTO> payment = paymentService.selectPaymentByMemberId(memberId);
-        if (payment != null) {
-            return ResponseEntity.ok(payment);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/member/{memberId}")
+//    public ResponseEntity<List<PaymentDTO>> getPaymentsByMemberId(@PathVariable String memberId) {
+//    	List<PaymentDTO> payment = paymentService.selectPaymentByMemberId(memberId);
+//        if (payment != null) {
+//            return ResponseEntity.ok(payment);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
     
     @PostMapping("/map")
     public ResponseEntity<String> mapReservationsToPayment(@RequestBody List<PaymentReservationMapDTO> list) {
@@ -66,4 +67,12 @@ public class PaymentController {
         return ResponseEntity.ok(successCount + "건 매핑 완료");
     }
 
+    @GetMapping("/payments/member/{memberId}")
+    public ResponseEntity<List<PaymentWithReservationsDTO>> getPaymentsByMemberId(@PathVariable String memberId){
+    	List<PaymentWithReservationsDTO> payments = paymentService.selectPaymentWithReservationsByMemberId(memberId);
+    	if(payments == null || payments.isEmpty()) {
+    		return ResponseEntity.notFound().build();
+    	}
+    	return ResponseEntity.ok(payments);
+    }
 }
