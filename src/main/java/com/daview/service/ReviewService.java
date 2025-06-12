@@ -12,4 +12,8 @@ public interface ReviewService {
 	List<ReviewDTO> getReviewsByPage(int page, int size);
 	
 	int getTotalReviewCount();
+	
+	ReviewDTO getReviewById(int revId);
+	
+	void increaseReviewViews(int revId); //조회수는 반환값 필요없음
 }

@@ -16,4 +16,8 @@ public interface ReviewMapper {
 	List<ReviewDTO> getReviewsByPage(Map<String, Integer> params);
 	
 	int getTotalReviewCount();
+	
+	ReviewDTO getReviewById(int revId);
+	
+	void increaseReviewViews(int revId);
 }

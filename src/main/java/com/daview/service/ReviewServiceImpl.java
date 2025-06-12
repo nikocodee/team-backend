@@ -41,4 +41,15 @@ public class ReviewServiceImpl implements ReviewService {
 	public int getTotalReviewCount() {
 		return reviewMapper.getTotalReviewCount();
 	}
+	
+	@Override
+	public ReviewDTO getReviewById(int revId) {
+		reviewMapper.increaseReviewViews(revId); //조회수 증가 실행
+		return reviewMapper.getReviewById(revId);
+	}
+	
+	@Override
+	public void increaseReviewViews(int revId) {
+		reviewMapper.increaseReviewViews(revId);
+	}
 }

@@ -22,4 +22,12 @@
 	<select id="getTotalReviewCount" resultType="int">
 		SELECT COUNT(*) FROM review_board
 	</select>
+	<select id="getReviewById" parameterType="int" resultType="com.daview.dto.ReviewDTO">
+		SELECT * FROM review_board WHERE rev_id = #{revId}
+	</select>
+	<update id="increaseReviewViews" parameterType="int">
+		UPDATE review_board
+		SET rev_views = rev_views + 1
+		WHERE rev_id = #{revId}
+	</update>
 </mapper>

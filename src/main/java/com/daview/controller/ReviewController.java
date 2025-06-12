@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +42,11 @@ public class ReviewController {
 	@GetMapping("/count")
 	public int getTotalReviewCount() {
 		return reviewService.getTotalReviewCount();
+	}
+	
+	@GetMapping("/{revId}")
+	public ResponseEntity<ReviewDTO> getReviewById(@PathVariable int revId) {
+		ReviewDTO review = reviewService.getReviewById(revId);
+		return ResponseEntity.ok(review);
 	}
 }
