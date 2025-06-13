@@ -8,7 +8,7 @@
 		INSERT INTO review_board 
 		(member_id, facility_name, rev_ttl, rev_cont, rev_stars, rev_views, rev_reg_date)
 	    VALUES 
-	    (#{memberId}, #{facilityName}, #{revTtl}, #{revCont}, #{revStars}, 0, NOW());
+	    (#{memberId}, #{facilityName}, #{revTtl}, #{revCont}, #{revStars}, 0, NOW())
 	</insert>
 	<select id="getAllReviews" resultType="com.daview.dto.ReviewDTO">
 		SELECT * FROM review_board ORDER BY rev_reg_date DESC
@@ -22,12 +22,20 @@
 	<select id="getTotalReviewCount" resultType="int">
 		SELECT COUNT(*) FROM review_board
 	</select>
-	<select id="getReviewById" parameterType="int" resultType="com.daview.dto.ReviewDTO">
+	<select id="getReviewById" parameterType="long" resultType="com.daview.dto.ReviewDTO">
 		SELECT * FROM review_board WHERE rev_id = #{revId}
 	</select>
-	<update id="increaseReviewViews" parameterType="int">
+	<update id="increaseReviewViews" parameterType="long">
 		UPDATE review_board
 		SET rev_views = rev_views + 1
+		WHERE rev_id = #{revId}
+	</update>
+	<update id="updateReview" parameterType="com.daview.dto.ReviewDTO">
+		UPDATE review_board
+		SET facility_name = #{facilityName}, 
+			rev_ttl = #{revTtl}, 
+			rev_cont = #{revCont}, 
+			rev_stars = #{revStars}
 		WHERE rev_id = #{revId}
 	</update>
 </mapper>

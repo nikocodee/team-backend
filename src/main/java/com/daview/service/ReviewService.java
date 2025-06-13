@@ -13,7 +13,9 @@ public interface ReviewService {
 	
 	int getTotalReviewCount();
 	
-	ReviewDTO getReviewById(int revId);
+	ReviewDTO getReviewById(Long revId);
 	
-	void increaseReviewViews(int revId); //조회수는 반환값 필요없음
+	void increaseReviewViews(Long revId); //조회수는 반환값 필요없음
+	
+	void updateReview(ReviewDTO review);
 }

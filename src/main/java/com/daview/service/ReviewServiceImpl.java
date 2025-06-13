@@ -43,13 +43,18 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public ReviewDTO getReviewById(int revId) {
+	public ReviewDTO getReviewById(Long revId) {
 		reviewMapper.increaseReviewViews(revId); //조회수 증가 실행
 		return reviewMapper.getReviewById(revId);
 	}
 	
 	@Override
-	public void increaseReviewViews(int revId) {
+	public void increaseReviewViews(Long revId) {
 		reviewMapper.increaseReviewViews(revId);
+	}
+	
+	@Override
+	public void updateReview(ReviewDTO review) {
+		reviewMapper.updateReview(review);
 	}
 }

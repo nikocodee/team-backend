@@ -17,7 +17,9 @@ public interface ReviewMapper {
 	
 	int getTotalReviewCount();
 	
-	ReviewDTO getReviewById(int revId);
+	ReviewDTO getReviewById(Long revId);
 	
-	void increaseReviewViews(int revId);
+	void increaseReviewViews(Long revId);
+	
+	void updateReview(ReviewDTO review);
 }
